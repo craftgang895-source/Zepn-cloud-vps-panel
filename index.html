@@ -10,56 +10,81 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 body {
   height: 100vh;
-  background: linear-gradient(135deg, #0a2540, #0f3b66);
+  background: radial-gradient(circle at top, #1a002b, #000000);
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
-/* Animation */
+/* Background glow animation */
+body::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: purple;
+  filter: blur(200px);
+  opacity: 0.3;
+  animation: moveGlow 10s infinite alternate;
+}
+
+@keyframes moveGlow {
+  0% { transform: translate(-200px, -200px); }
+  100% { transform: translate(200px, 200px); }
+}
+
+/* Container animation */
 .container {
-  animation: fadeIn 1s ease-in-out;
+  animation: slideUp 1s ease forwards;
+  opacity: 0;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes slideUp {
+  from { transform: translateY(80px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .login-box {
-  background: #fff;
+  background: rgba(20, 20, 20, 0.95);
   padding: 40px;
   width: 360px;
-  border-radius: 12px;
+  border-radius: 15px;
   text-align: center;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  box-shadow: 0 0 30px rgba(140, 0, 255, 0.5);
+  backdrop-filter: blur(10px);
 }
 
+/* Logo */
 .logo {
-  font-size: 32px;
+  font-size: 35px;
   margin-bottom: 10px;
+  color: #a855f7;
 }
 
 h2 {
-  margin-bottom: 20px;
-  color: #333;
+  color: white;
+  margin-bottom: 25px;
 }
 
+/* Inputs */
 .input-box {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .input-box input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: transparent;
+  color: white;
   outline: none;
 }
 
@@ -68,7 +93,7 @@ h2 {
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: #777;
+  color: #aaa;
   font-size: 14px;
   transition: 0.3s;
   pointer-events: none;
@@ -78,43 +103,45 @@ h2 {
 .input-box input:valid + label {
   top: -8px;
   font-size: 12px;
-  background: white;
+  color: #a855f7;
+  background: #141414;
   padding: 0 5px;
-  color: #0f3b66;
 }
 
+/* Options */
 .options {
   display: flex;
   justify-content: space-between;
   font-size: 13px;
   margin-bottom: 20px;
+  color: #ccc;
 }
 
 .options a {
+  color: #a855f7;
   text-decoration: none;
-  color: #0f3b66;
 }
 
+/* Button */
 button {
   width: 100%;
   padding: 12px;
-  background: #0f3b66;
-  color: white;
+  background: linear-gradient(45deg, #7b2ff7, #a855f7);
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
 }
 
 button:hover {
-  background: #124c85;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #a855f7;
 }
 
-.signup {
-  margin-top: 15px;
-  font-size: 13px;
-  color: #555;
-}
+/* Footer text removed as requested */
+
 </style>
 
 </head>
@@ -124,7 +151,7 @@ button:hover {
   <div class="login-box">
 
     <div class="logo">⚡</div>
-    <h2>Welcome Back!</h2>
+    <h2>Welcome Back</h2>
 
     <form onsubmit="return loginCheck()">
 
@@ -139,15 +166,13 @@ button:hover {
       </div>
 
       <div class="options">
-        <label><input type="checkbox"> Remember Me</label>
-        <a href="#">Forgot Password?</a>
+        <label><input type="checkbox"> Remember</label>
+        <a href="#">Forgot?</a>
       </div>
 
       <button type="submit">Login</button>
 
     </form>
-
-    <p class="signup">Create a New Account</p>
 
   </div>
 </div>
@@ -157,16 +182,14 @@ function loginCheck() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  // Demo credentials
   if(email === "aayanrajput593@gmail.com" && password === "Aayan987") {
     alert("Login Successful 🚀");
-    return false;
   } else {
     alert("Invalid Credentials ❌");
-    return false;
   }
+  return false;
 }
 </script>
 
 </body>
-  </html>
+</html>
